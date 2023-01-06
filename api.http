@@ -1,0 +1,26 @@
+### Get list of vouchers
+GET http://127.0.0.1:8000/voucher
+
+### Get list of vouchers by status
+GET http://127.0.0.1:8000/voucher/status/active
+
+### Create voucher
+POST http://127.0.0.1:8000/voucher
+Content-Type: application/json
+
+{
+  "amount": 100,
+  "expirationAt": "2023-01-23 13:54:12"
+}
+
+### Update voucher
+PUT http://127.0.0.1:8000/voucher/8
+Content-Type: application/json
+
+{
+  "amount": 50,
+  "expirationAt": "2023-01-01 13:54:12"
+}
+
+### Delete voucher
+DELETE http://127.0.0.1:8000/voucher/4
