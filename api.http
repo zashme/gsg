@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### Update voucher
-PUT http://127.0.0.1:8000/voucher/8
+PUT http://127.0.0.1:8000/voucher/7
 Content-Type: application/json
 
 {
@@ -24,3 +24,17 @@ Content-Type: application/json
 
 ### Delete voucher
 DELETE http://127.0.0.1:8000/voucher/4
+
+
+
+### Get list of orders
+GET http://127.0.0.1:8000/order?page=1
+
+### Create order
+POST http://127.0.0.1:8000/order
+Content-Type: application/json
+
+{
+  "amount": 321,
+  "voucherId": 6
+}

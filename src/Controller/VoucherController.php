@@ -25,7 +25,7 @@ class VoucherController extends AbstractController
      */
     public function listActive(VoucherRepository $voucherRepository): Response
     {
-        return $this->json($voucherRepository->findAllActive());
+        return $this->json(['data' => $voucherRepository->findAllActive()]);
     }
 
     /**
@@ -33,7 +33,7 @@ class VoucherController extends AbstractController
      */
     public function list(string $status, VoucherRepository $voucherRepository): Response
     {
-        return $this->json($voucherRepository->findByStatus($status));
+        return $this->json(['data' => $voucherRepository->findByStatus($status)]);
     }
 
     /**
@@ -53,7 +53,7 @@ class VoucherController extends AbstractController
         $voucher = Voucher::getFromRequest($voucherRequest);
         $repository->add($voucher);
 
-        return $this->json($voucher);
+        return $this->json(['data' => $voucher]);
     }
 
     /**
@@ -82,7 +82,7 @@ class VoucherController extends AbstractController
         $voucher = Voucher::getFromRequest($voucherRequest, $voucher);
         $entityManager->flush();
 
-        return $this->json($voucher);
+        return $this->json(['data' => $voucher]);
     }
 
     /**
@@ -90,6 +90,10 @@ class VoucherController extends AbstractController
      */
     public function delete(Voucher $voucher, VoucherRepository $voucherRepository): Response
     {
+        if ($voucher->isUsed()) {
+            throw new UserException('Deleting used vouchers is not allowed', 400);
+        }
+
         $voucherId = $voucher->getId();
         $voucherRepository->remove($voucher, true);
 

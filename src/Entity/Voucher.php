@@ -6,6 +6,8 @@ namespace App\Entity;
 use App\Repository\VoucherRepository;
 use App\Request\VoucherRequest;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 /**
  * @ORM\Entity(repositoryClass=VoucherRepository::class)
@@ -31,6 +33,7 @@ class Voucher
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Context({ DateTimeNormalizer::FORMAT_KEY = "Y-m-d H:i:s" })
      */
     private \DateTimeImmutable $expirationAt;
 
