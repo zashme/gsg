@@ -5,6 +5,7 @@ namespace App\EventListener;
 
 use App\Exception\UserException;
 use App\Exception\ValidationErrorsException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -12,6 +13,13 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ExceptionListener
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
@@ -42,6 +50,9 @@ class ExceptionListener
         } else {
             // All other exceptions will return 500 Internal server error
             $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logger->critical($exception->getMessage(), [
+                'exception' => $exception,
+            ]);
         }
 
         // sends the modified response object to the event

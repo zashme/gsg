@@ -1,11 +1,11 @@
 ### Get list of vouchers
-GET http://127.0.0.1:8000/voucher
+GET http://127.0.0.1:8080/voucher
 
 ### Get list of vouchers by status
-GET http://127.0.0.1:8000/voucher/status/active
+GET http://127.0.0.1:8080/voucher/status/active
 
 ### Create voucher
-POST http://127.0.0.1:8000/voucher
+POST http://127.0.0.1:8080/voucher
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### Update voucher
-PUT http://127.0.0.1:8000/voucher/7
+PUT http://127.0.0.1:8080/voucher/7
 Content-Type: application/json
 
 {
@@ -23,18 +23,18 @@ Content-Type: application/json
 }
 
 ### Delete voucher
-DELETE http://127.0.0.1:8000/voucher/4
+DELETE http://127.0.0.1:8080/voucher/4
 
 
 
 ### Get list of orders
-GET http://127.0.0.1:8000/order?page=1
+GET http://127.0.0.1:8080/order?page=1
 
 ### Create order
-POST http://127.0.0.1:8000/order
+POST http://127.0.0.1:8080/order
 Content-Type: application/json
 
 {
   "amount": 321,
-  "voucherId": 6
+  "voucherId": 1
 }
